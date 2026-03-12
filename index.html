@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lopes Marini — Acesso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #C0001A;
+    --red-dark: #8B0013;
+    --white: #FFFFFF;
+    --off-white: #FAF9F7;
+    --gray-100: #F3F2F0;
+    --gray-300: #D0CEC9;
+    --gray-500: #7A7772;
+    --gray-800: #2C2A28;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── LAYOUT SPLIT ── */
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    min-height: 600px;
+  }
+
+  /* ══════════════════════════
+     LADO ESQUERDO — LOGIN
+  ══════════════════════════ */
+  .left {
+    background: var(--off-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 64px 72px;
+    position: relative;
+    z-index: 2;
+    animation: fadeInLeft 0.6s ease both;
+  }
+
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* linha decorativa vermelha */
+  .left::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--red);
+  }
+
+  .brand {
+    margin-bottom: 52px;
+  }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+
+  .brand-sub {
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-top: 6px;
+  }
+
+  .welcome-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .welcome-sub {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  /* ── FORM ── */
+  .form { width: 100%; max-width: 360px; }
+
+  .field { margin-bottom: 20px; }
+
+  .field label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 7px;
+  }
+
+  .field input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--gray-800);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.18s, box-shadow 0.18s;
+  }
+
+  .field input:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(192, 0, 26, 0.08);
+  }
+
+  .field input::placeholder { color: var(--gray-300); }
+
+  /* ── BOTÃO ── */
+  .btn-login {
+    width: 100%;
+    padding: 14px;
+    background: var(--red);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-login:hover {
+    background: var(--red-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(192, 0, 26, 0.28);
+  }
+
+  .btn-login:active { transform: translateY(0); }
+
+  /* ── ERRO ── */
+  .error-msg {
+    display: none;
+    background: #FFF0F2;
+    border: 1px solid #FCA5A5;
+    color: var(--red);
+    font-size: 0.83rem;
+    padding: 10px 14px;
+    border-radius: 7px;
+    margin-top: 14px;
+    text-align: center;
+    animation: shake 0.35s ease;
+  }
+
+  .error-msg.show { display: block; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+
+  /* rodapé discreto */
+  .left-footer {
+    position: absolute;
+    bottom: 28px;
+    left: 72px;
+    font-size: 0.72rem;
+    color: var(--gray-300);
+    letter-spacing: 0.04em;
+  }
+
+  /* ══════════════════════════
+     LADO DIREITO — IMAGEM
+  ══════════════════════════ */
+  .right {
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease 0.2s both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* imagem de fundo com opacidade */
+  .right-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.45;
+  }
+
+  /* overlay sutil */
+  .right-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(192,0,26,0.12) 0%, rgba(44,42,40,0.35) 100%);
+  }
+
+  /* conteúdo em branco sobre a foto */
+  .right-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 56px 64px;
+    color: var(--white);
+  }
+
+  .right-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .right-tagline em {
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .right-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    max-width: 380px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  }
+
+  .right-divider {
+    width: 48px;
+    height: 3px;
+    background: var(--red);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
+  /* ── RESPONSIVO ── */
+  @media (max-width: 768px) {
+    .wrapper { grid-template-columns: 1fr; }
+    .right { display: none; }
+    .left { padding: 48px 32px; align-items: center; }
+    .left::before { display: none; }
+    .left-footer { left: 32px; }
+    .form { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- ══ ESQUERDO: LOGIN ══ -->
+  <div class="left">
+
+    <div class="brand">
+      <div class="brand-name">Lopes Marini</div>
+      <div class="brand-sub">Gestão de Imóveis</div>
+    </div>
+
+    <h1 class="welcome-heading">Bem-vinda de volta.</h1>
+    <p class="welcome-sub">Acesse sua área de gestão de imóveis.</p>
+
+    <form class="form" onsubmit="fazerLogin(event)">
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="seu@email.com"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="senha">Senha</label>
+        <input
+          type="password"
+          id="senha"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <button type="submit" class="btn-login" id="btnEntrar">
+        Entrar
+      </button>
+
+      <div class="error-msg" id="errorMsg">
+        E-mail ou senha incorretos. Tente novamente.
+      </div>
+    </form>
+
+    <div class="left-footer">© 2026 Lopes Marini Imóveis</div>
+  </div>
+
+  <!-- ══ DIREITO: IMAGEM + MENSAGEM ══ -->
+  <div class="right">
+    <div class="right-bg"></div>
+    <div class="right-overlay"></div>
+    <div class="right-content">
+      <div class="right-divider"></div>
+      <div class="right-tagline">
+        Gerencie com<br><em>excelência.</em>
+      </div>
+      <p class="right-desc">
+        Controle total sobre os imóveis da carteira —<br>
+        descrições atualizadas, prazos em dia e<br>
+        proprietários sempre bem atendidos.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const USUARIO_VALIDO = {
+    email: 'isadora.moreira@lopesmarini.com.br',
+    senha: 'Lopes@2026'
+  };
+
+  function fazerLogin(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim().toLowerCase();
+    const senha = document.getElementById('senha').value;
+    const erro  = document.getElementById('errorMsg');
+    const btn   = document.getElementById('btnEntrar');
+
+    if (
+      email === USUARIO_VALIDO.email &&
+      senha === USUARIO_VALIDO.senha
+    ) {
+      btn.textContent = '✓ Acessando...';
+      btn.style.background = '#059669';
+      erro.classList.remove('show');
+
+      // redireciona para a página de gestão
+      setTimeout(() => {
+        window.location.href = 'gestao-imoveis.html';
+      }, 600);
+    } else {
+      erro.classList.remove('show');
+      // força re-trigger da animação
+      void erro.offsetWidth;
+      erro.classList.add('show');
+      document.getElementById('senha').value = '';
+      document.getElementById('senha').focus();
+    }
+  }
+</script>
+
+</body>
+</html>
