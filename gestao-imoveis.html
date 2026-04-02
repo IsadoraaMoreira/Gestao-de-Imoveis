@@ -741,6 +741,7 @@
         <option value="">Todas as gestoras</option>
         <option value="Angela">Angela</option>
         <option value="Nicolas">Nicolas</option>
+        <option value="Outro">Outro</option>
       </select>
       <select class="form-select" id="filterStatus" onchange="renderTable()" style="min-width:140px">
         <option value="">Todos os status</option>
@@ -799,6 +800,7 @@
           <select class="form-select" id="inputGestora">
             <option value="Angela">Angela</option>
             <option value="Nicolas">Nicolas</option>
+            <option value="Outro">Outro</option>
           </select>
         </div>
         <div class="form-group">
@@ -1065,7 +1067,7 @@ const API_KEY_STORAGE = 'lopesmarini_apikey';
 const MSG_PADRAO_KEY = 'lopesmarini_msg';
 const PROMPT_PADRAO_KEY = 'lopesmarini_prompt';
 
-const MSG_PADRAO_DEFAULT = `Olá, {nome}! Tudo bem?
+const MSG_PADRAO_DEFAULT = `Olá! Tudo bem?
 
 Aqui é a Isadora, da Lopes Marini 😊
 
